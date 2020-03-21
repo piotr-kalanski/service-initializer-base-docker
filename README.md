@@ -4,7 +4,7 @@ Base Docker image for [Service Initializer](https://github.com/piotr-kalanski/se
 
 # Run task using Docker image
 
-    docker run -it --rm service-initializer-base-docker --name service_name --description service_description --parameters "{'param1':'value1','param2':'value2'}"
+    docker run -it --rm service-initializer-base-docker --name service_name --description service_description --parameters "{'param1':'value1','param2':'value2'}" --service-metadata "{'param1':'value1','param2':'value2'}"
 
 # Extending image
 
@@ -29,10 +29,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 You have to implement business logic for you custom task in *run_task* function:
 
 ```python
-def run_task(name: str, description: str, parameters: dict):
+def run_task(name: str, description: str, parameters: dict, service_metadata: dict):
     # place your code here
 ```
 Meaning of input parameters:
 - name - service name
 - description - service description
-- parameters - custom parameters to initialize service
+- parameters - task parameters
+- service_metadata - service metadata parameters
